@@ -29,8 +29,8 @@ describe("TodoController.createTodo", () => {
 ```
 
 
-    5. In order to run our test we had to change in our package.json, change the stuff that was in test in scripts to just jest
-        6. By running this it made jest automatically run without telling it where to look, it ran the test and failed like expected
+5. In order to run our test we had to change in our package.json, change the stuff that was in test in scripts to just jest
+6. By running this it made jest automatically run without telling it where to look, it ran the test and failed like expected
 
 JEST ARCHITECTURE
 
