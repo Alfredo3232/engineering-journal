@@ -17,7 +17,7 @@
         5. `.test` seems like JEST reads those files
 4. After that we decided to begin, on our test file we required todo.controller.js, then we wrote this
 
-    ```
+```
 describe("TodoController.createTodo", () => {
     it("should have a createTodo function", () => {
         expect(
@@ -44,4 +44,3 @@ JEST ARCHITECTURE
         2. The way it does this it looks for require calls or import calls and goes down the tree. It's more like a map and goes down and extracts them and loads them.
         3. This also calls watchman - (it only calls this if you have it installed) this is used to keep track of all the changes in your files, then caches them to jest-haste-map. So that next time when jest is run it gives it the list of changed files, added files, removed files, …etc. 
         4. This also calls jest-worker - this is a module used to see how many cores does your PC have and ideally uses most of them to process the above faster
-        5. 
