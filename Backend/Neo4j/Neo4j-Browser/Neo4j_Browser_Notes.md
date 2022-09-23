@@ -189,16 +189,15 @@ SKIP 3
 LIMIT 3
 ```
 
-        * What this does is it returns the results after the first 3 and gets limited by 3
+* What this does is it returns the results after the first 3 and gets limited by 3
         * NOTE - make sure you SKIP before you limit or else you will get a error
-    * If you want to give a property of a label a custom name you can do this
+  * If you want to give a property of a label a custom name you can do this
 
-        ```
+```JS
 RETURN actor.name AS Name, role.earnings
-
 ```
 
-        * What this does is essentially this `var Name actor.name`
+* What this does is essentially this `var Name actor.name`
 
 ---
 
@@ -207,10 +206,8 @@ RETURN actor.name AS Name, role.earnings
 * Removing Duplicates with DISTINCT
   * If you get duplicate results from RETURN, you can use DISTINCT to prevent from getting duplicate results. For example
 
-        ```
-
+```JS
 RETURN DISTINCT actor.name
-
 ```
 
 * Aggregation functions (COUNT, AVG, SUM, MIN, MAX)
@@ -220,73 +217,62 @@ RETURN DISTINCT actor.name
   * SUM
     * Let's say that your return values are all number values,  you can add all the numbers together to one single sum
 
-            ```
-
+ ```JS
 SUM(<VAR>)
-
 ```
 
-    * AVG
-        * Like SUM this gives back a result as one, except this one gives you the average of all summed results
+* AVG
+  * Like SUM this gives back a result as one, except this one gives you the average of all summed results
 
-            ```
+```JS
 AVG(<VAR>)
-
 ```
 
-    * MIN
-        * Lets say your return values are all numbers, if you want the minimum of all those numbers
+* MIN
+  * Lets say your return values are all numbers, if you want the minimum of all those numbers
 
-            ```
+```JS
 MIN(<VAR>)
-
 ```
 
-    * MAX
-        * Like MIN, MAX return a single value that is the highest of all the values being put in the variable
+* MAX
+  * Like MIN, MAX return a single value that is the highest of all the values being put in the variable
 
-            ```
+```JS
 MAX(<VAR>)
-
 ```
 
 * String Functions
 
-    ```
-
+```JS
 toString(<EXPRESSION>)
-
 ```
 
-    * What this does converts integers, floats, boolean, string, point, duration, date, time, localtime, localdatetime, or date time value to a string
+* What this does converts integers, floats, boolean, string, point, duration, date, time, localtime, localdatetime, or date time value to a string
 
-        ```
+```JS
 toUpper(<EXPRESSION>)
-
 ```
 
-    * What this does it returns the original string in  all uppercase
+* What this does it returns the original string in  all uppercase
 
-        ```
+ ```JS
 toLower(<EXPRESSION>)
-
 ```
 
-    * What this does it returns the original string in all lower case
+* What this does it returns the original string in all lower case
 
-        ```
+```JS
 trim(<EXPRESSION>)
-
 ```
 
-    * What this does it removes any spaces at the end and beginning of the given string
+* What this does it removes any spaces at the end and beginning of the given string
 
-        ```
+```JS
 replace(<STRING>, "word to find", "word to replace")
-
 ```
 
-    * When given a string or variable that is a string it find and replaces whatever it is given in the string
+* When given a string or variable that is a string it find and replaces whatever it is given in the string
 
 ---
 
@@ -294,29 +280,25 @@ replace(<STRING>, "word to find", "word to replace")
 
 * Nodes
 
-    ```
-
+```JS
 CREATE()
-
 ```
 
-        * This alone will create a node with 0 labels and 0 properties
+* This alone will create a node with 0 labels and 0 properties
 
-            ```
+```JS
 CREATE(:<LABEL>)
-
 ```
 
-        * This is how create a node with a label
-        * You can also stack labels on top of each other
+* This is how create a node with a label
+  * You can also stack labels on top of each other
 
-            ```
+```JS
 CREATE(<VAR>:<LABEL>:<LABEL>{<KEY>: <VALUE>})
 RETURN <VAR>
-
 ```
 
-        * This is how you create a node with labels and properties
+* This is how you create a node with labels and properties
 
 * Relationships
 
