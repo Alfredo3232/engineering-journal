@@ -1,4 +1,4 @@
-| Questions  | Answers  |    
+| Questions  | Answers  |
 | --- | --- |
 | What is TDD, what are the benefits? | TDD stands for Test-Driven Development, is a software development process that focuses on creating unit test cases before developing the actual code, this approach combines programming, unit testing, and refactoring. |
 | What does describe do? |  |
