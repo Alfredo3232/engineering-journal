@@ -295,6 +295,8 @@
 
 ![image](./images/21.png "image_tooltip")
 
+---
+
 # Q&A
 
 * What is the difference between git checkout & git switch?
