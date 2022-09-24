@@ -302,29 +302,25 @@ RETURN <VAR>
 
 * Relationships
 
-    ```
-
+```JS
 CREATE (<STUFF>)-[:<NAME>]->(<NODE_NAME>)
-
 ```
 
-        * This is how you create a relationship to another node
+* This is how you create a relationship to another node
 
-            ```
+```JS
 CREATE (<STUFF>)-[:<NAME>{<KEY>:VALUE}]->(<NODE_NAME>)
-
 ```
 
-        * You can also insert properties into relationships
+* You can also insert properties into relationships
 
 * Adding to existing data
-    *
 
 <p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image1.png "image_tooltip")
 
-    * What this does is finds existing nodes and all their values on lines 1 & 2. Line 3 is where he creates a relationship using their variables and then returns both variables.
+* What this does is finds existing nodes and all their values on lines 1 & 2. Line 3 is where he creates a relationship using their variables and then returns both variables.
 
 ---
 
@@ -333,23 +329,20 @@ CREATE (<STUFF>)-[:<NAME>{<KEY>:VALUE}]->(<NODE_NAME>)
 * Deleting Nodes, Relationships
   * You can't delete node with relationships still attached, you need to also match the relationships associated with
 
-        ```
-
+```JS
 MATCH (node)-[rel]-()
 DELETE node, rel
-
 ```
 
-    * This is to delete a node and the relationships associated with those nodes
+* This is to delete a node and the relationships associated with those nodes
 
-        ```
+```JS
 MATCH (node)
 OPTIONAL MATCH (node)-[rel]-()
 DELETE node, rel
-
 ```
 
-    * This is an extension of the other, the other only deleted nodes that had relationships, but wouldn’t delete any nodes that had no relationships, meanwhile this code does.
+* This is an extension of the other, the other only deleted nodes that had relationships, but wouldn’t delete any nodes that had no relationships, meanwhile this code does.
 
 ---
 
@@ -357,42 +350,36 @@ DELETE node, rel
 
 * SET properties, labels
 
-    ```
-
+```JS
 MATCH (tom:Person{name: 'Tom Hanks'})
 SET tom.sex = 'male'
 RETURN tom
-
 ```
 
-    * The SET command allows you add a new key-value property inside of any of the given nodes
-        * You can also set labels on a existing node
+* The SET command allows you add a new key-value property inside of any of the given nodes
+  * You can also set labels on a existing node
 
-            ```
+```JS
 SET tom:Handsome
-
 ```
 
 * REMOVE properties, labels
 
-    ```
-
+```JS
 MATCH (tom:Person{name: 'Tom Hanks'})
 REMOVE tom:Handsome
 RETURN tom
-
 ```
 
-    * The REMOVE removes labels and properties in a node
+* The REMOVE removes labels and properties in a node
 
 * Changing Relationship Types
-    *
 
 <p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image2.png "image_tooltip")
 
-    * This is an example of setting a new relationship type
+* This is an example of setting a new relationship type
 
 ---
 
@@ -403,73 +390,63 @@ RETURN tom
 * Boolean logic with NULL
   * NULL can stand for a value that doesn’t exist or undefined.
 
-        ```
-
+```JS
 WITH ( true OR false ) AS result
 RETURN result
-
 ```
 
-        * If you have a value that is either true or false the result is always going to be true, however
+* If you have a value that is either true or false the result is always going to be true, however
 
-            ```
+```JS
 WITH ( true OR false ) AS result
 RETURN result
-
 ```
 
-        * This is going to return false
+* This is going to return false
 
-            ```
+```JS
 WITH ( NULL IN [1,2,3,NULL] ) AS result
 RETURN result
-
 ```
 
-    * This is going to return NULL because NULL is not the same as NULL, NULL represents a future value, those future values could be different from other future values
+* This is going to return NULL because NULL is not the same as NULL, NULL represents a future value, those future values could be different from other future values
 
 * NULL Gotchas
 
-    ```
-
+```JS
 WITH (NULL IS NULL) AS result
 RETURN result
-
 ```
 
-    * This will actually return true
+* This will actually return true
 
-        ```
+```JS
 WITH (NULL IS NOT NULL) AS result
 RETURN result
-
 ```
 
-    * This will return false
+* This will return false
 
-        ```
+```JS
 WITH ( NULL AND false ) AS result
 RETURN result
-
 ```
 
-    * This will return false
+* This will return false
 
-        ```
+```JS
 WITH ( NULL OR false ) AS result
 RETURN result
-
 ```
 
-    * This will return NULL
+* This will return NULL
 
-        ```
+```JS
 WITH ( NULL + [1,2,3] ) AS result
 RETURN result
-
 ```
 
-    * Adding a list to a NULL value is undefined. The answer is therefore null.
+* Adding a list to a NULL value is undefined. The answer is therefore null.
 
 ---
 
@@ -477,35 +454,30 @@ RETURN result
 
 * MERGE
 
-    ```
-
+```JS
 MERGE (<VAR>:<LABEL>{<key>: <VALUE>})
 RETURN <VAR>
-
 ```
 
-    * MERGE does what MATCH does except if it doesn’t find a match it creates that value for you.
+* MERGE does what MATCH does except if it doesn’t find a match it creates that value for you.
 
 ---
 
 # Working with paths
 
 * Nth Degree Relationships
-    *
 
 <p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image3.png "image_tooltip")
 
 * Variable Length Paths
-    *
 
 <p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image4.png "image_tooltip")
 
 * Path Length
-    *
 
 <p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -513,10 +485,8 @@ RETURN <VAR>
 
 * Shortest Path
 
-    ```
-
+```JS
 MATCH path = shortestPath((<VAR>)-[:<REL>*..<NUM>]->(<VAR>))
-
 ```
 
-    * The shortestPath “function” returns the shortest path to the second node given, the number of relationships is NECESSARY, i’m guessing it finds the shortest out of the number given.
+* The shortestPath “function” returns the shortest path to the second node given, the number of relationships is NECESSARY, i’m guessing it finds the shortest out of the number given.
