@@ -1,63 +1,56 @@
 # Getting Started
 
-
-
 * What is Vue JS?
-    * Vue JS is Javascript Framework that makes building interactive and reactive web front ends easier
-    * Framework - A framework is a third party library that exposes utility functionalities and a set of rules on how to build your javascript application
-    * Reactive - usually refers when your app is able to react to user input, update the screen dynamically
-    * DOM - Document Object Model
+  * Vue JS is Javascript Framework that makes building interactive and reactive web front ends easier
+  * Framework - A framework is a third party library that exposes utility functionalities and a set of rules on how to build your javascript application
+  * Reactive - usually refers when your app is able to react to user input, update the screen dynamically
+  * DOM - Document Object Model
 * Different Ways of Using Vue
-    * Vue can be used to control parts of HTML pages or entire pages
-        * The Widget approach on a multi-page-application, some pages are still rendered on and served by a backend server
-    * Vue can also be used to control the entire frontend of a web application
-        * Single Page Application approach. Server only sends one HTML page, thereafter, Vue takes over and controls the UI
+  * Vue can be used to control parts of HTML pages or entire pages
+    * The Widget approach on a multi-page-application, some pages are still rendered on and served by a backend server
+  * Vue can also be used to control the entire frontend of a web application
+    * Single Page Application approach. Server only sends one HTML page, thereafter, Vue takes over and controls the UI
 * Exploring Vue Alternatives
-    * Vue JS - Complete component based UI framework, includes most core features. A bit less popular than React & Angular
-    * React JS - Lean and focused component based UI library. Certain features like routing are added via community packages
-    * Angular - Complete component based UI framework, packed with features. Uses TypeScript. Can be overkill for smaller projects.
+  * Vue JS - Complete component based UI framework, includes most core features. A bit less popular than React & Angular
+  * React JS - Lean and focused component based UI library. Certain features like routing are added via community packages
+  * Angular - Complete component based UI framework, packed with features. Uses TypeScript. Can be overkill for smaller projects.
 * Re-Building the App with Vue
-    * Do note that we are doing this through a CDN
-    * How to start with Vue
-        * 1. Add CDN to your HTML 
-        * 2. Add a JS file through a script tag
-        * 3. In your JS your start Vue with Vue.createApp()
-    * Vue is the object we have available thanks to our CDN
-    * .createApp() is how we start a Vue App?
-        * This takes in a object inside you add and do various things like
-            * data(){}
-                * Is wrapped in a return {}
-                * Inside the return you add properties with  values
-            * Methods: {}
-                * Inside it you add functions
-    * At the end of createApp(), you have to specify where part of your html do you want to be controlled and watched by Vue
-        * Add .mount(&lt;ID_HERE>)
-
+  * Do note that we are doing this through a CDN
+  * How to start with Vue
+    * 1. Add CDN to your HTML
+    * 2. Add a JS file through a script tag
+    * 3. In your JS your start Vue with Vue.createApp()
+  * Vue is the object we have available thanks to our CDN
+  * .createApp() is how we start a Vue App?
+    * This takes in a object inside you add and do various things like
+      * data(){}
+        * Is wrapped in a return {}
+        * Inside the return you add properties with  values
+      * Methods: {}
+        * Inside it you add functions
+  * At the end of createApp(), you have to specify where part of your html do you want to be controlled and watched by Vue
+    * Add .mount(&lt;ID_HERE>)
 
 ---
 
-
 # Basic & Core Concepts - DOM Interaction with Vue
 
-
-
 * Creating and Connecting Vue App Instances
-    * 
+    *
 
 <p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image1.png "image_tooltip")
 
     * This is an example of a Vue small app
+
 * Binding Attributes with the “v-bind” Directive
-    * &lt;a href=”LINK”>&lt;/a>
-        * Instead of providing a link hardcoded you can do it through vue
-            * You can create a property in data instead like this
-            * 
+  * &lt;a href=”LINK”>&lt;/a>
+    * Instead of providing a link hardcoded you can do it through vue
+      * You can create a property in data instead like this
+      *
 
 <p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image2.png "image_tooltip")
 
@@ -66,13 +59,13 @@
 
 <p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image3.png "image_tooltip")
 
         * In order to use a data property from vue to a html tag attribute you must use
 
             ```
 v-bind:<attribute>="DATA"
+
 ```
 
 
@@ -91,7 +84,6 @@ data(){
 }
 ```
 
-
         * When you try to input this into your html, it wont work as expected
     * In order to make html string work in a html tag
         * You can do this for example
@@ -100,13 +92,15 @@ data(){
 <p v-html>{{ text }}</p>
 ```
 
-
             * v-html tells vue that the text inside the p tags are html and not text
     * In Vue it interprets text as text unless told otherwise, this is a really good security feature since it prevents cross-site scripting attacks.
+
 * Understanding Event Binding
 
     ```
+
 v-on:<EVENT>="<STUFF>"
+
 ```
 
 
@@ -118,14 +112,15 @@ v-on:<EVENT>="<STUFF>"
 v-bind:value + v-on:input = v-model
 ```
 
-
 * Methods used for Data Binding: How it Works
-    * NOTE
-        * When Vue re-renders the page, Vue also re-executes any methods you have in your HTML for example any methods within curly braces, or with the bind. So in conclusion any non-event bound methods will be re-executed by Vue whenever anything in the screen changes
+  * NOTE
+    * When Vue re-renders the page, Vue also re-executes any methods you have in your HTML for example any methods within curly braces, or with the bind. So in conclusion any non-event bound methods will be re-executed by Vue whenever anything in the screen changes
 * Introducing Computed Properties
 
     ```
+
 computed: {}
+
 ```
 
 
@@ -138,11 +133,11 @@ computed: {}
 watch : {}
 ```
 
-
     * This “methods” also accepts functions, but the difference on this one is that it accepts functions that are named after the properties on data(), so whenever that property changes, it fires the function.
 
         ```
 <PROPERTY_NAME>(newValue, oldValue){ //CODE }
+
 ```
 
 
