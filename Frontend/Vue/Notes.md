@@ -19,17 +19,17 @@
   * How to start with Vue
     * 1. Add CDN to your HTML
     * 2. Add a JS file through a script tag
-    * 3. In your JS your start Vue with Vue.createApp()
+    * 3. In your JS your start Vue with `Vue.createApp()`
   * Vue is the object we have available thanks to our CDN
-  * .createApp() is how we start a Vue App?
+  * `Vue.createApp()` is how we start a Vue App?
     * This takes in a object inside you add and do various things like
-      * data(){}
+      * `data(){}`
         * Is wrapped in a return {}
         * Inside the return you add properties with  values
-      * Methods: {}
+      *`Methods: {}`
         * Inside it you add functions
-  * At the end of createApp(), you have to specify where part of your html do you want to be controlled and watched by Vue
-    * Add .mount(&lt;ID_HERE>)
+  * At the end of `Vue.createApp()`, you have to specify where part of your html do you want to be controlled and watched by Vue
+    * Add `.mount(<ID_HERE>)`
 
 ---
 
@@ -42,9 +42,10 @@
 * This is an example of a Vue small app
 
 * Binding Attributes with the “v-bind” Directive
-  * &lt;a href=”LINK”>&lt;/a>
+  * `<a href=”LINK”></a>`
     * Instead of providing a link hardcoded you can do it through vue
       * You can create a property in data instead like this
+
 ![IMG_HERE](images/image2.png "image_tooltip")
 
 * In order to use a data property inside a html tag attribute you must first bind it
@@ -60,7 +61,7 @@ v-bind:<attribute>="DATA"
 * For a shorter syntax of `v-bind:`, you can just simply type `:`, and then after the attribute
 * Understanding “methods” in Vue Apps
   * Let's say you have a property inside `data()` called `burger`and you want to use it in your methods function, usually you would need to bind this to let JS know what you are referring to.
-        * However is Vue you can just say `this.burger` , burger being a property in data. Vue automatically knows and binds the this to what you are referring to
+    * However is Vue you can just say `this.burger` , burger being a property in data. Vue automatically knows and binds the this to what you are referring to
 * Outputting Raw HTML Content with v-html
   * Let’s say you have a data property and that property has a string for example
 
@@ -74,7 +75,7 @@ data(){
 
 * When you try to input this into your html, it wont work as expected
   * In order to make html string work in a html tag
-        * You can do this for example
+    * You can do this for example
 
 ```HTML
 <p v-html>{{ text }}</p>
@@ -108,7 +109,7 @@ computed: {}
 
 * This “method”, accepts functions, but the difference between computed and methods are that vue will be aware of computed function’s dependencies and only re-execute them if one of their dependencies change.
   * NOTE
-        * Call computed functions like data properties not like method functions. In the HTML don’t execute them like functions, but instead point at them like data properties
+    * Call computed functions like data properties not like method functions. In the HTML don’t execute them like functions, but instead point at them like data properties
 * Working with Watchers
 
  ```JS
@@ -135,4 +136,138 @@ watch : {}
     * Allows you to run any code in reaction to some changed data (e.g. send Http request etc.)
     * Use for any non-data update you want to make
 * v-bind and v-on Shorthands
-  * MORE HERE
+  * We could use v-on, however there is a shorthand for v-on and that is a @, for example
+    * OLD -
+
+```HTML
+v-on:<EVENT>="<FUNCTION>"
+```
+
+* NEW -
+
+```HTML
+@<EVENT>="<FUNCTION>"
+```
+
+* We could use v-bind, however there is also a shortcut for this
+  * OLD -
+
+```HTML
+v-bind:<ATTRIBUTE>="<VALUE>"
+```
+
+* NEW -
+
+```HTML
+:<ATTRIBUTE>="<VALUE>"
+```
+
+* Dynamic Styling with Inline Styles
+
+```JS
+:style="{borderColor: boxASelected ? 'red': '#ccc' }"
+```
+
+* This is an example of a inline style
+  * With this styling we can add conditions to what sort of CSS it will render according to what parameter we are setting it to for example the code on top ^
+    * We set a ternary operator and it will render red if its true or gray
+
+* Adding CSS classes Dynamically
+  * Adding inline styles directly in our HTML is not a very good thing to do because this usually overrides any CSS that we might need, therefore to make it easier and better we add CSS classes dynamically
+  * You can set a class dynamically for example
+
+```JS
+:class="{active: boxASelected}"
+```
+
+* active is a css class  and it renders according if boxASelected is true or not
+
+* Classes & Computed Properties
+  * You can use computed properties can be helpful for adding CSS classes dynamically instead of adding logic directly in the HTML code you can just add a property instead
+    * For example we could write the code above in a better way
+    * HTML Side -
+
+```JS
+:class= "boxAClasses"
+```
+
+* JS Side
+
+```JS
+boxAClasses() {
+    return {active: this.boxASelected};
+}
+```
+
+* This is especially helpful if your code is become really complex depending if it changes dynamically
+
+* Dynamic Classes: Array Syntax
+
+```JS
+:class= "[ '<CLASS>', {<EXPRESSION>}]"
+```
+
+* With the array syntax you can add multiple classes and expressions
+
+---
+
+# Rendering Conditional Content & Lists
+
+* Rendering Content Conditionally
+  * In order to render content conditionally you need to declare it like for example
+
+```JS
+<p v-if="true">EXAMPLE</p>
+```
+
+* This will render according if the value given is true
+  * You can additionally add a v-else-if, this will render if v-if above it is false.
+    * And finally v-else will render if any element with v-if or v-else-if is false
+
+* Using v-show Instead of v-if
+  * v-show does not work with v-if, v-else-if or with v-else, meaning if you want multiple conditional renders then you will have to add more v-shows
+  * Differences between v-show and v-if
+    * v-if removes and adds elements from and to the DOM
+      * CONS-
+        * Adding and removing elements can cost performance
+      * PROS-
+        * A cleaner and more readable DOM
+    * v-show just hides and shows items with css
+      * CONS-
+        * Cluttered DOM
+      * PROS-
+        * Better performance
+  * You should typically use v-if and use v-show if you have a element that it’s visibility changes a lot
+* Rendering Lists of Data
+
+```JS
+v-for="<VAR> in <DATA_PROPERTY>"
+```
+
+* This is like a for loop in JS, it iterates over an array, and displays every value in the data property you give it
+  * `v-for="(&lt;VALUE>, &lt;INDEX>) in &lt;DATA_PROPERTY>"`
+  * You can also get the index, not only the value, of course you can name both the value and index to anything that you want
+  * v-for also supports objects, you can also extract the key and value exactly the same as you would in a array
+
+* Lists & Keys
+
+```JS
+:key=""
+```
+
+* You might encounter bugs due to how Vue handles re rendering lists in v-for. The key keeps track of what you want to track, usually you want to track in a v-for the VALUE property.
+  * USE `:key=""`, when using v-for to avoid bugs
+
+---
+
+# Course Project: The Monster Slayer Game
+
+* Project Setup & First Methods
+  * You can also call other methods, not just data properties. Like data properties you do need this keyword for example, `this.function()`.
+
+---
+
+# Vue: Behind the Scenes
+
+* An Introduction to Vue’s Reactivity
+    *
