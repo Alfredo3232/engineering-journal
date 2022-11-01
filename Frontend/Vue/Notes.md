@@ -216,7 +216,7 @@ boxAClasses() {
 * Rendering Content Conditionally
   * In order to render content conditionally you need to declare it like for example
 
-```JS
+```HTML
 <p v-if="true">EXAMPLE</p>
 ```
 
@@ -267,7 +267,409 @@ v-for="<VAR> in <DATA_PROPERTY>"
 
 ---
 
-# Vue: Behind the Scenes
+# Vue: Behind the Scenes l
 
 * An Introduction to Vue’s Reactivity
-    *
+  * The all of data()’s properties is taken by Vue and merges it to a behind the scenes global object, the same object where your methods are merged into.
+* Vue Reactivity: A Deep Dive
+  * Javascript is not reactive by default for example
+
+```JS
+let message = 'Hello!';
+let longMessage = message + 'World!';
+console.log(longMessage);
+message = 'Hello!!!!';
+console.log(longMessage);
+```
+
+* Up to the 1 console log it will display as expected ‘Hello!World’ however at the second console log it wont show the new message because  longMessage is at another point in time.
+  * What Vue uses is something called new Proxy() this is a native JS feature, that helps an object be “reactive”
+* Understanding Templates
+  * When vue takes control of a specific part in the HTML that is called a Template
+* Working with Refs
+  * ref, allows you to retrieve values from DOM elements, when you need them, instead of all the time
+  * In order to get access to refs="VARIABLE", you need to reference this -  this.$refs.VARIABLE.VALUE
+* How Vue Updates the DOM
+  * NOTE
+    * These are functions that are outside of method meaning it will be on the root of the app component
+  * beforeCreate() {} , This will execute any code before the Vue App is initialized.
+  * created() {} , This will execute any code after the Vue app is initialized, but you still won't see anything like beforeCreate because the app has not been mounted yet.
+  * beforeMount() {} , This will execute any code right before the app mounts, you still won't see anything rendered on the screen.
+  * mounted() {} , This will execute any code after it was mounted, so it will show something on the screen.
+  * beforeUpdate() {} , This will execute any code before any code is updated. Meaning this won’t execute when the page is loading.
+  * updated() {} , This will execute any code after any code is updated. Meaning this won’t execute when the page is loading.
+
+---
+
+# Introducing Components
+
+* Introducing components
+  * Components are great if you have certain HTML code which you reuse on different parts in your HTML, which then you have certain functionality.
+
+```JS
+app.component('Words-Words', {
+    //this can have any code that a normal vue app would
+      like data and methods
+});
+```
+  
+* A vue component is essentially another vue app that belongs to another app.
+
+---
+
+# Vue Development Setup & Workflow
+
+* Inspecting the Vue Code & “.vue” files
+
+![alt_text](images/image4.png "image_tooltip")
+
+* In order to start a vue app begin by installing vue cli globally
+
+```bash
+npm install -g @vue/cli
+```
+
+* Then start an application by running
+
+```bash
+vue create <NAME_OF_PROJECT>
+```
+
+* NOTE:
+  * Vue CLI is in maintenance mode, it is recommended to use [create-vue](https://github.com/vuejs/create-vue)
+
+```bash
+npm init vue@3
+```
+
+* This starts a project with Vue3, if you need Vue2 then
+
+ ```bash
+npm init vue@2
+```
+
+* DON’T omit the @number because npm will try to do it itself and will probably install a outdated version of the project
+  * In the src folder is where we keep most of our JS and vue code
+    * We have a main.js file, inside this is where we actually create our application and mount it to an id of the HTML
+
+![alt_text](images/image5.png "image_tooltip")
+
+* Our vue files are structured like this
+
+```HTML
+<template>
+  <section>
+ <h2>My Friends</h2>
+ <ul>
+   <li></li>
+ </ul>
+  </section>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        friends: [
+          {
+            id: "jenny",
+            name: "Jenny",
+            phone: "012 3456 7890",
+            email: "jenny@localhost.com",
+          },
+          {
+            id: "john",
+            name: "John Wick",
+            phone: "098 7654 3210",
+            email: "wick@localhost.com",
+          },
+        ],
+      };
+    },
+  };
+
+</script>
+```
+
+* It seems that vue files are capitalized, for example this file is called App.vue
+  * It's also common practice to keep HTML relatively clean as possible because components like the HTML code above will be inserted
+
+---
+
+# Component Communication
+
+* Introducing “props” (Parent => Child Communication)
+  * To declare props, short for properties. Props are like data properties. Inside the component you can start them like this
+
+```JS
+props: [
+  'NAME'
+]
+```
+
+* You can access it anywhere in your component or app like normal this.NAME_HERE a
+  * NOTE
+    * When declaring your prop values make sure to use camelcase, vue automatically translates props from this propName to this prop-name.
+
+* Prop Behavior & Changing Props
+  * Props usually should not be mutated, you shouldn’t mutate the props because Vue uses a concept called “unidirectional data flow”
+  * There two ways in changing the value of props
+    * One way is to let the parent know that we’d like to change this. Then the parent can change the data in itself and pass the updated data back to the child
+      * In the parent set a data property to the prop for example
+
+```JS
+copyProp: this.propName
+```
+
+* So then as a substitute you can use copyProp as the original prop, without changing the actual prop
+
+* Validating Props
+  * Props can also be declared not only in an array but also in this way
+
+```JS
+props: {
+   NAME1: String,
+   NAME2: Number,
+   NAME3: {
+       type: String,
+       required: true
+   }
+}
+```
+
+* You can declare a type of what your prop is going to receive and if it receives anything else it will give out a error
+  * It can also receive an object with the property of a String or whatever data type it is, but also it has extra features that are specific, like required.
+  * If you set your prop to required: false, a good thing to put is also the default property, so if the prop isn’t given anything it defaults back to the set value.
+    * default: VALUE_HERE
+    * I am assuming that the default value has to be the same data type that is expected like for example a String
+    * In the default you also provide a function to execute when that prop isn’t given a value
+  * Another thing that you can provide in the prop object is something called validator and takes in a function for example
+
+![alt_text](images/image6.png "image_tooltip")
+
+* This validator checks if the value that isFavorite receives is either of these two values and will return true or false and will warn you in the console when it isn’t receiving the correct expected values
+
+* Working with Dynamic Prop Values
+  * When using v-for in a custom component adding a key is mandatory for example
+  * :key=“friend.id”
+* Emitting Custom Events (Child => Parent Communication)
+  * emits: [], this is how you declare this and you will define which custom events your component will eventually at some point emit.
+
+```JS
+emits: ['something in here']
+```
+
+* $emit(), Vue $emit is a function that lets us emit, or send, custom events from a child component to its parent. because it is used to notify the parent component that something changed.
+
+* Provide + Inject To The Rescue
+  * Provide & inject - A pattern you can use to provide data in one place and inject it (which means use it) in another place.
+
+```JS
+provide: { 
+  //properties 
+}
+```
+
+```JS
+inject: ['<PROPERTIES_NAME>']
+```
+
+*You can only inject what has been provided by a parent component or a ancestor component
+    * For provide there is another way to actually instiate it
+      * BEFORE -
+
+```JS
+provide: {
+ <name>: <value>
+}
+```
+
+* AFTER -
+
+```JS
+provide() {
+  return {
+    <name>: <value>
+  }
+}
+```
+
+* NOTE - You should not always use provide & inject to replace props and custom events. Props and custom events should be your default communication mechanism.
+  * NOTE - if you find yourself having some pass through components, for example if you have a component file or multiple components passing through props & passing through the immediate event in such cases using provide & inject can save you some unnecessary code
+
+---
+
+# Diving Deeper Into Components
+
+* Global vs Local Components
+
+```JS
+const app = createApp(App)
+app.component('name-component', Name)
+```
+
+* When we register components like this means that we are registering the component as a Global component. That means that component is available globally in the entire Vue app.
+  * When registering components globally means that Vue needs to load them all when the application is loaded initially
+  * When registering components locally instead of doing component(), you can import your component to the file that is going to use it.
+    * For example:
+
+```JS
+import COMPO from './<PATH>'
+export default {
+  components: {
+    'name-compo': COMPO
+  }
+}
+```
+
+* Also for the names of your component you can also use camel case for your name.
+  * For example:
+
+```JS
+import CompoDos from './<PATH>'
+export default {
+  components: {
+    CompoDos: CompoDos
+  }
+}
+```
+
+* However unlike in the other way we need to declare components like this
+
+```HTML
+<CompoDos />
+```
+
+* Also you can do it just like this and you can style it both ways &lt;compo-dos> and &lt;CompoDos>
+
+```JS
+components: {
+  CompoDos
+}
+```
+
+* Scoped Styles
+  * No matter where you put your styling it would always be treated as global styling that affects your entire app
+
+```HTML
+<style>
+   //CSS HERE
+</style>
+```
+
+* However there is a way to have the styling only affect the vue file you are on
+
+```HTML
+<style scoped>
+   //CSS HERE
+</style>
+```
+
+* NOTE - it only affects the template that lives in the same file and no other component, no child component, no sibling component
+
+* Introducing Slots
+  * If you want to create your own component with some specific styling you can do that, for example
+
+```HTML
+<template>
+  <div>
+    {{ content }}
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["content"],
+};
+</script>
+
+<style scoped>
+div {
+  margin: 2rem auto;
+  max-width: 30rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+}
+</style>
+```
+
+* There is a problem here, if you try to use use this component as a wrapper it wont work as expected because Vue doesn’t know what to do with the inside content, you could pass your content through something like this
+
+```HTML
+<base-card content="CONTENT_HERE">
+</base-card>
+```
+
+* However if you pass it through there, you won't be able to have Vue features
+  * If you want to pass inside content it won’t be through props it would be through slot
+    * You don't need anything in script, you need to use it like this
+
+```HTML
+<template>
+   <div>
+      <slot></slot>
+   </div>
+</template>
+```
+
+* Named Slots
+  * If you add different slots vue will throw an error because it doesn't know what you are passing through belongs to what slot.
+  * So slots have a attribute called “name”
+
+```HTML
+<slot name="NAME"></slot>
+```
+
+* This tells vue that you have another slot, you don’t need to name one slot since that is the default, so whatever slot that you don’t name (ONLY ONE UNNAMED SLOT) is the default one.
+  * In order to use the named slot, you have to tell vue where you want your content to pass.
+    * v-slot:&lt;NAME>
+    * v-slot:default
+      * This targets the default slot (The one without  a name attribute)
+  * Anything within &lt;slot>&lt;/slot>, becomes the default content, meaning that if that slot doesn’t receive any content it displays the content within the slot
+
+* More on Slots
+  * To console log slots there is a special property provided one of the ways to see what is inside slots its to console log it in mounted
+
+```JS
+mounted() {
+   console.log(this.$slots);
+}
+```
+
+* You can also access and console log individual slots like so
+
+```JS
+console.log(this.$slots.default);
+```
+
+```JS
+console.log(this.$slots.<NAME>)
+```
+
+* There is a shortcut for v-slot: and that is the hash. For example
+  * OLD:
+
+```HTML
+<template v-slot:NAME>
+  //code
+</template>
+```
+
+* NEW:
+
+```HTML
+<template #header>
+  //code
+</template>
+```
+
+* Dynamic Components
+  * A new and good way to add dynamic components it's through this way
+
+```HTML
+<component is="name-component">
+</component>
+```
+
+* You can actually vBind the is property and dynamically change with a method based on what happens to on your page
+  * The old way is through putting the components and attaching a v-if and using it that way
