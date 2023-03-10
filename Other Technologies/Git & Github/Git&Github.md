@@ -71,7 +71,7 @@
 7. git commit -a -m “description” - this adds all unstaged changes and commits them
 8. git checkout branchName -  this also switches branches, but has tons of functionality
 9. git switch -c branchName - this creates a new branch provided by the name and switches for you upon creation
-10. When creating a new file on a separate branch and you dont save & commit, that file will follow you on every branch, until you commit it to your branch
+10. When creating a new file on a separate branch and you don't save & commit, that file will follow you on every branch, until you commit it to your branch
     1. However, for files that are changed and in conflict with other branches, and you try to switch branches. Git will warn you that the changes that you made will be lost if you don't save & commit
 11. git branch -D branchName - this deletes a branch regardless of its merge status
 12. How to change a branch's name ?
@@ -256,7 +256,7 @@
 
 ![image](./images/15.png "image_tooltip")
 
-* Git Blobs (binary large object)  are the object type git uses to store the contents of files, blobs don't event include the file names of eachfile or any other data, just the content inside the file
+* Git Blobs (binary large object)  are the object type git uses to store the contents of files, blobs don't event include the file names of each file or any other data, just the content inside the file
 * Trees are a git objects used to store the contents of a directory, each tree contains pointers that can refer to blobs and to other trees
 
 ![image](./images/16.png "image_tooltip")

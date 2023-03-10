@@ -23,7 +23,7 @@ describe("TodoController.createTodo", () => {
         )
         .toBe("function");
     })
-};
+});
 ```
 
 1. In order to run our test we had to change in our package.json, change the stuff that was in test in scripts to just jest

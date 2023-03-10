@@ -1,13 +1,13 @@
 # UDEMY NODE COURSE
 
 1. ![Flex Container Features](images/image1.png "image_tooltip")
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 2. ![Justify Content and Align Items](images/image2.png "image_tooltip")
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 3. ![Align Content ](images/image3.png "image_tooltip")
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 4. ![Flex Item Features](images/image4.png "image_tooltip")
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 5. Font Awesome
     1. All of them are class and order of importance down.
         1. ```fas```
@@ -23,12 +23,12 @@
                 color: color-here;
             }
         ```
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 6. z-index
     1. z-index  css value this allows to put html content above others, z-index possible values are negative, zero and positive numbers
     2. z-index needs a position value or else it wont work as intended
         1. positions need to be fixed, absolute or relative
-    <!--- MAIN SECTION SEPERATOR -->
+    <!--- MAIN SECTION SEPARATOR -->
 7. Node
     1. _dirname
         1. What this is, is the location of your current directory.
